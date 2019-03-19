@@ -168,6 +168,9 @@ GEM
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
+    slim (4.0.1)
+      temple (>= 0.7.6, < 0.9)
+      tilt (>= 2.0.6, < 2.1)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -180,6 +183,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    temple (0.8.1)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -227,6 +231,7 @@ DEPENDENCIES
   redis (~> 4.0)
   sass-rails (~> 5.0)
   selenium-webdriver
+  slim
   spring
   spring-watcher-listen (~> 2.0.0)
   therubyracer

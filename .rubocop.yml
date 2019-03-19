@@ -1,0 +1,39 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - db/schema.rb
+    - db/restore_schema.rb
+    - db/migrate/*
+    - script/**/*
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - config/routes/*
+    - spec/**/*
+    - lib/tasks/*
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%w': '()'
+
+Metrics/BlockLength:
+  Exclude:
+    - config/routes.rb

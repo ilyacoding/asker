@@ -4,13 +4,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.6.0"
 
 gem "bootsnap", ">= 1.1.0", require: false
+gem "cancancan"
 gem "coffee-rails", "~> 4.2"
+gem "devise"
+gem "devise-bootstrap-views"
 gem "jbuilder", "~> 2.5"
 gem "less-rails"
 gem "mysql2", ">= 0.4.4", "< 0.6.0"
 gem "puma", "~> 3.11"
 gem "rails", "~> 5.2.2", ">= 5.2.2.1"
 gem "redis", "~> 4.0"
+gem "rolify"
 gem "sass-rails", "~> 5.0"
 gem "slim"
 gem "therubyracer"

@@ -9,6 +9,7 @@ Bundler.require(*Rails.groups)
 module Asker
   class Application < Rails::Application
     config.load_defaults 5.2
+    config.i18n.default_locale = :ru
 
     config.generators do |generator|
       generator.test_framework  false

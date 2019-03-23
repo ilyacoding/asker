@@ -49,6 +49,4 @@ test:
 #
 production:
   <<: *default
-  database: asker_production
-  username: asker
-  password: <%= ENV['ASKER_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_URL'] %>

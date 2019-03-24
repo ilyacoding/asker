@@ -24,6 +24,10 @@ class User < ApplicationRecord
   after_create :assign_default_role
 
   def assign_default_role
-    add_role(:user) if roles.blank?
+    add_role(:member) if roles.blank?
+  end
+
+  def role_name
+    I18n.t("roles.#{roles.first.name}")
   end
 end

@@ -6,15 +6,16 @@ class Ability
 
     can :read, :all
 
-    if user.member?
-      can :manage, Question, user_id: user.id
-      # can :manage
-      # can :manage, Answer,
-    elsif user.moderator?
-      # can :manage, Category
+    if user.has_role? :member
+      can :create, Question
+      can :create, Answer
+      can :destroy, Question, user_id: user.id
+      can :destroy, Answer, user_id: user.id
+    elsif user.has_role? :moderator
+      can :manage, Category
       cam :manage, Question
-      # cam :manage, Answer
-    elsif user.admin?
+      cam :manage, Answer
+    elsif user.has_role? :admin
       can :manage, :all
     end
   end

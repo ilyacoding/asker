@@ -4,7 +4,6 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  description :text(65535)
-#  name        :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  category_id :bigint(8)
@@ -22,5 +21,21 @@
 #
 
 class Question < ApplicationRecord
-  validates_presence_of :name, :description, :category_id, :user_id
+  validates_presence_of :description, :category_id, :user_id
+
+  belongs_to :user
+  belongs_to :category
+
+  after_create :save_to_marlin
+  before_destroy :delete_from_marlin
+
+  private
+
+  def save_to_marlin
+    QuestionSaver.new(id, description).call
+  end
+
+  def delete_from_marlin
+    QuestionDeleter.new(id, description).call
+  end
 end

@@ -40,6 +40,9 @@ html lang="en"
             ul.nav.nav-list
               li.nav-header = link_to "Все категории", categories_path
               - Category.find_each do |category|
-                li= link_to category.name, category_path(category)
+                li = link_to category.name, category_path(category)
+          .well.sidebar-nav
+            ul.nav.nav-list
+              li.nav-header = link_to "Все пользователи", users_path
       footer
         p © 2019

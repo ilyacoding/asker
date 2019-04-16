@@ -1,0 +1,20 @@
+.page-header
+  h1 Все пользователи
+
+table.table.table-striped
+  thead
+    tr
+      th Пользователи
+      th Роль
+      - if can? :manage, User
+        th Действия
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.email
+        td = user.role_name
+        - if can? :manage, User
+          td
+            = link_to "Администратор", user_make_admin_path(user), method: :post, class: 'btn btn-danger'
+            = link_to "Модератор", user_make_moderator_path(user), method: :post, class: 'btn btn-primary'
+            = link_to "Пользователь", user_make_member_path(user), method: :post, class: 'btn btn-success'

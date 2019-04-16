@@ -28,6 +28,8 @@ class User < ApplicationRecord
   end
 
   def role_name
+    return if roles.first.blank?
+
     I18n.t("roles.#{roles.first.name}")
   end
 end

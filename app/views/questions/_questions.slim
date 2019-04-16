@@ -2,9 +2,11 @@ table.table.table-striped
   thead
     tr
       th Вопрос
+      th Пользователь
       th Дата
   tbody
     - questions.each do |question|
       tr
         td = link_to question.description, question_path(question)
+        td = question.user.email
         td = l question.created_at

@@ -3,6 +3,7 @@
     = @question.description
     - if can? :destroy, @question
       = link_to "Удалить", question_path(@question), method: :delete, class: 'btn btn-xs btn-danger'
+  h5 = "Автор: #{@question.user.email}"
 .panel.panel-default
   .panel-body
     h4 Возможный ответ
@@ -19,7 +20,7 @@
     tbody
       - @question.answers.order("votes_count DESC").each do |answer|
         tr
-          td = "#{answer.content} (рейтинг: #{answer.votes_count})"
+          td = "#{answer.content} (рейтинг: #{answer.votes_count}) (автор: #{answer.user.email})"
           td
             - if can?(:create, answer) && !VoteManager.voted_for?(current_user, answer)
               = link_to "+1", answer_vote_path(answer), method: :post, class: 'btn btn-xs btn-success'

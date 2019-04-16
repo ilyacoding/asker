@@ -7,7 +7,9 @@ class QuestionSearch
   end
 
   def similar_answer
-    search_question.answers.order("votes_count DESC").first
+    return if (question = search_question).blank?
+
+    question.answers.order("votes_count DESC").first
   end
 
   def search_question

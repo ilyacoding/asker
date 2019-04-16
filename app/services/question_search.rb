@@ -19,7 +19,13 @@ class QuestionSearch
   end
 
   def similar_question_id
-    @similar_question_id ||= marlin_question_ids.max_by { |_key, value| value }[0]
+    return if ordered_marlin_questions.blank?
+
+    @similar_question_id ||= ordered_marlin_questions[0]
+  end
+
+  def ordered_marlin_questions
+    @ordered_marlin_questions ||= marlin_question_ids.max_by { |_key, value| value }
   end
 
   def marlin_question_ids

@@ -9,6 +9,7 @@ class Ability
     if user.has_role? :member
       can :create, Question
       can :create, Answer
+      can :create, Answer
       can :destroy, Question, user_id: user.id
       can :destroy, Answer, user_id: user.id
     elsif user.has_role? :moderator

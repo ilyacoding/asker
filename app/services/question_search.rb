@@ -1,8 +1,13 @@
 class QuestionSearch
-  attr_reader :description
+  attr_reader :exclude_question_id, :description
 
-  def initialize(description)
+  def initialize(exclude_question_id, description)
+    @exclude_question_id = exclude_question_id
     @description = description
+  end
+
+  def similar_answer
+    search_question.answers.order("votes_count DESC").first
   end
 
   def search_question
@@ -16,9 +21,10 @@ class QuestionSearch
   end
 
   def marlin_question_ids
-    words.map { |word| get_ids(word) }.flatten.inject(Hash.new(0)) do |hash, element|
+    words.map { |word| get_ids(word) }.flatten.each_with_object(Hash.new(0)) do |element, hash|
+      next if exclude_question_id.to_i == element.to_i
+
       hash[element] += 1
-      hash
     end
   end
 

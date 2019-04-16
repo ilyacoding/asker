@@ -24,6 +24,8 @@ class WordProcessor
   end
 
   def save_state(state)
+    return marlin_manager.delete_key if state.blank?
+
     marlin_manager.put_key(state)
   end
 

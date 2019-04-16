@@ -25,6 +25,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
+  has_many :answers, dependent: :destroy
 
   after_create :save_to_marlin
   before_destroy :delete_from_marlin

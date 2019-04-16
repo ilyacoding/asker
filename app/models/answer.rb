@@ -4,6 +4,7 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  content     :string(255)
+#  votes_count :bigint(8)        default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  question_id :bigint(8)
@@ -23,4 +24,6 @@
 class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
+
+  has_many :votes, dependent: :destroy
 end

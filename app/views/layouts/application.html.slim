@@ -26,6 +26,7 @@ html lang="en"
             ul.nav.navbar-nav
               - if current_user.present?
                 li.nav-item = link_to "#{current_user.email} (#{current_user.role_name})", root_path
+                li.nav-item = link_to "Выйти", destroy_user_session_path, method: :delete
               - else
                 li.nav-item = link_to "Войти", new_user_session_path
     .container
@@ -39,10 +40,6 @@ html lang="en"
             ul.nav.nav-list
               li.nav-header = link_to "Все категории", categories_path
               - Category.find_each do |category|
-                li= link_to category_name, category_path
-          /! /.well
-        /! /span
-      /! /row
+                li= link_to category.name, category_path(category)
       footer
         p © 2019
-    /! /container

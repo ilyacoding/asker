@@ -1,0 +1,10 @@
+= form_for @answer, html: { class: "form-horizontal question" } do |f|
+  = f.hidden_field :question_id, value: @question.id
+  .form-group
+    = f.label "Ответ", class: 'control-label col-lg-2'
+    .col-lg-10
+      = f.text_area :content, class: 'form-control'
+    = f.error_span(:content)
+  .form-group
+    .col-lg-offset-2.col-lg-10
+      = f.submit "Добавить ответ", class: 'btn btn-primary'

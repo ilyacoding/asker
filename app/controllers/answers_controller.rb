@@ -1,61 +1,36 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: %i(show edit update destroy)
-
-  load_and_authorize_resource
-
-  def index
-    @answers = Answer.all
-  end
-
-  def show; end
-
-  def new
-    @answer = Answer.new
-  end
-
-  def edit; end
-
   def create
-    @answer = Answer.new(answer_params)
+    @answer = Answer.new(answer_params.merge(user: current_user))
 
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: "Answer was successfully created." }
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
+    if @answer.save
+      redirect_to @answer.question, notice: "Ответ был успешно добавлен."
+    else
+      redirect_to @answer.question, notice: "Ответ не может быть пустым."
     end
   end
 
-  def update
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: "Answer was successfully updated." }
-        format.json { render :show, status: :ok, location: @answer }
-      else
-        format.html { render :edit }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+  def vote
+    @answer = Answer.find(params[:answer_id])
+    VoteManager.vote(current_user, @answer)
+    redirect_to @answer.question, notice: "Ваш голос был учтён."
   end
 
   def destroy
+    @answer = find_answer
+    @question = @answer.question
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: "Answer was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to @question, notice: "Ответ был успешно удалён." }
     end
   end
 
   private
 
-  def set_answer
-    @answer = Answer.find(params[:id])
+  def find_answer
+    Answer.find(params[:id])
   end
 
   def answer_params
-    params.require(:answer).permit(:content, :user_id, :question_id)
+    params.require(:answer).permit(:content, :question_id)
   end
 end

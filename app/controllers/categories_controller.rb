@@ -1,7 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i(show edit update destroy)
-
-  load_and_authorize_resource
+  before_action :set_category, only: %i(show destroy)
 
   def index
     @categories = Category.all
@@ -13,40 +11,19 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  def edit; end
-
   def create
     @category = Category.new(category_params)
 
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to @category, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+      redirect_to @category, notice: "Категория была успешно создана."
+    else
+      render :new
     end
   end
 
   def destroy
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to categories_url, notice: "Категория была успешно удалена."
   end
 
   private

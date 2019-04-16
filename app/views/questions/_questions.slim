@@ -1,0 +1,10 @@
+table.table.table-striped
+  thead
+    tr
+      th Вопрос
+      th Дата
+  tbody
+    - questions.each do |question|
+      tr
+        td = link_to question.description, question_path(question)
+        td = l question.created_at

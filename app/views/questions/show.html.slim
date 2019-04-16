@@ -1,0 +1,33 @@
+.page-header
+  h1
+    = @question.description
+    - if can? :destroy, @question
+      = link_to "Удалить", question_path(@question), method: :delete, class: 'btn btn-xs btn-danger'
+.panel.panel-default
+  .panel-body
+    h4 Возможный ответ
+    - if @similar_answer.present?
+      = @similar_answer.content
+      = link_to "(вопрос)", question_path(@similar_answer.question)
+    - else
+      | Похожих вопросов не найдено
+- if @question.answers.any?
+  table.table.table-striped
+    thead
+      tr
+        th Ответы
+    tbody
+      - @question.answers.order("votes_count DESC").each do |answer|
+        tr
+          td = "#{answer.content} (рейтинг: #{answer.votes_count})"
+          td
+            - if can?(:create, answer) && !VoteManager.voted_for?(current_user, answer)
+              = link_to "+1", answer_vote_path(answer), method: :post, class: 'btn btn-xs btn-success'
+            - if can? :destroy, answer
+              = link_to "Удалить", answer_path(answer), method: :delete, class: 'btn btn-xs btn-danger'
+- else
+  | Ответов пока нет..
+hr
+
+- if can? :create, Answer
+  = render "questions/answer_form"

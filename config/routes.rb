@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :answers
+  resources :answers do
+    post "vote"
+  end
   resources :categories
   devise_for :users
   resources :questions

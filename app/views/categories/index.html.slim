@@ -1,7 +1,7 @@
 .page-header
   h1
     | Все категории
-    - if can? :create, Question
+    - if can? :create, Category
       = link_to "Создать категорию", new_category_path, class: 'btn btn-primary'
 
 table.table.table-striped

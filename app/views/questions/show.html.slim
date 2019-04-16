@@ -22,7 +22,7 @@
         tr
           td = "#{answer.content} (рейтинг: #{answer.votes_count}) (автор: #{answer.user.email})"
           td
-            - if can?(:create, answer) && !VoteManager.voted_for?(current_user, answer)
+            - if can?(:create, Vote) && !VoteManager.voted_for?(current_user, answer)
               = link_to "+1", answer_vote_path(answer), method: :post, class: 'btn btn-xs btn-success'
             - if can? :destroy, answer
               = link_to "Удалить", answer_path(answer), method: :delete, class: 'btn btn-xs btn-danger'

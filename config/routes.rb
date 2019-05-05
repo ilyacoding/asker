@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     post "vote"
   end
   resources :categories
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   resources :questions
   resources :users, only: :index do
     post "make_admin"

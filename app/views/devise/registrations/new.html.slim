@@ -14,5 +14,7 @@ h1 Регистрация
     = f.label "Подтверждение пароля"
     = f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control'
   .form-group
+    = recaptcha_tags
+  .form-group
     = f.submit t('.sign_up'), class: 'btn btn-primary'
 = render 'devise/shared/links'

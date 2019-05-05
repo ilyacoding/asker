@@ -1,0 +1,13 @@
+- if questions.any?
+  table.table.table-striped
+    thead
+      tr
+        th Вопрос
+        th Задан
+    tbody
+      - questions.each do |question|
+        tr
+          td = link_to question.description, question_path(question)
+          td = "#{time_ago_in_words(question.created_at)} назад"
+- else
+  | Пользователь пока не задавал вопросов

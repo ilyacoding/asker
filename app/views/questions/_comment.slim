@@ -1,11 +1,11 @@
 .row
   .col-sm-1
     .thumbnail
-      img.img-responsive.user-photo src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+      = image_tag gravatar_url(answer.user.email), class: "img-responsive user-photo"
   .col-sm-8
     .panel.panel-default
       .panel-heading
-        strong = answer.user.username
+        strong = link_to answer.user.username, user_path(answer.user)
         span.text-muted.margin-left = "откомментировал #{time_ago_in_words(answer.created_at)} назад"
         span
           - if can?(:create, Vote) && !VoteManager.voted_for?(current_user, answer)

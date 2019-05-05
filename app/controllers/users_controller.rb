@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def make_admin
     find_and_clean_user.add_role :admin
     redirect_to_index

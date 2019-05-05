@@ -3,8 +3,10 @@
 # Table name: users
 #
 #  id                     :bigint(8)        not null, primary key
+#  answers_count          :bigint(8)        default(0), not null
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
+#  questions_count        :bigint(8)        default(0), not null
 #  remember_created_at    :datetime
 #  reputation             :integer          default(0), not null
 #  reset_password_sent_at :datetime
@@ -23,6 +25,10 @@
 class User < ApplicationRecord
   rolify
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+
+  has_many :questions
+  has_many :answers
+  has_many :votes
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, multiline: true

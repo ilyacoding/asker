@@ -1,0 +1,18 @@
+- if answers.any?
+  - answers.each do |answer|
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            span.text-muted.margin-left = "откомментировал #{time_ago_in_words(answer.created_at)} назад"
+            - if VoteManager.voted_for?(answer.question.user, answer)
+              span.right-align
+                i.fa.fa-star = " Выбор автора"
+            span.right-align.margin-left
+          .panel-body
+            = answer.content
+            hr
+            = "Рейтинг: +#{answer.votes_count} | "
+            = link_to answer.question.description, question_path(answer.question)
+- else
+  | Пользователь пока не отвечал на вопросы

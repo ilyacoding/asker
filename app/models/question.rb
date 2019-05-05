@@ -23,7 +23,7 @@
 class Question < ApplicationRecord
   validates_presence_of :description, :category_id, :user_id
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
   belongs_to :category
   has_many :answers, dependent: :destroy
 

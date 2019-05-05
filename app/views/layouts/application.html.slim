@@ -25,7 +25,7 @@ html lang="en"
             li= link_to "Главная", "/"
             ul.nav.navbar-nav
               - if current_user.present?
-                li.nav-item = link_to "#{current_user.username} (#{current_user.role_name})", root_path
+                li.nav-item = link_to "#{current_user.username} (#{current_user.role_name})", user_path(current_user)
                 li.nav-item = link_to "Выйти", destroy_user_session_path, method: :delete
               - else
                 li.nav-item = link_to "Войти", new_user_session_path

@@ -1,5 +1,6 @@
 module ApplicationHelper
-  def formatted_date(date)
-    l(date, format: "%H:%M, %-d %b")
+  def gravatar_url(email, size = 64)
+    gravatar = Digest::MD5::hexdigest(email).downcase
+    "http://gravatar.com/avatar/#{gravatar}.png?s=#{size}"
   end
 end

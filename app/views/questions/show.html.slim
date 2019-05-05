@@ -3,7 +3,10 @@
     = @question.description
     - if can? :destroy, @question
       = link_to "Удалить", question_path(@question), method: :delete, class: 'btn btn-xs btn-danger'
-  h5 = "Автор: #{@question.user.username} | Задан #{time_ago_in_words(@question.created_at)} назад"
+  h5
+    = "Автор: "
+    = link_to @question.user.username, user_path(@question.user)
+    = " | Задан #{time_ago_in_words(@question.created_at)} назад"
 .panel.panel-default
   .panel-body
     h4 Возможный ответ

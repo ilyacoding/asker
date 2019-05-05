@@ -1,0 +1,42 @@
+<div class="col-md-12">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="profile-sidebar">
+        <div class="profile-userpic">
+          <%= image_tag gravatar_url(@user.email), class: "img-responsive" %>
+        </div>
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            <%= @user.username %>
+          </div>
+          <div class="profile-usertitle-job">
+            Рейтинг: <%= @user.reputation %>
+          </div>
+        </div>
+        <div class="profile-usermenu">
+          <ul class="nav">
+            <li class="active">
+              <a class="js-user-profile-switch" id="1" data-target="profile" href="#">
+                <i class="glyphicon glyphicon-th-large"></i>
+                Вопросы <span class='badge badge-default badge-pill pull-right'><%= @user.questions_count %></span></a>
+            </li>
+            <li>
+              <a class="js-user-profile-switch" id="2" data-target="comments" href="#">
+                <i class="glyphicon glyphicon-comment"></i>
+                Ответы <span class='badge badge-default badge-pill pull-right'><%= @user.answers_count %></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div id="profile" class="profile-content">
+        <%= render "users/questions", questions: @user.questions %>
+      </div>
+
+      <div id="comments" class="profile-content" style="display: none;">
+        <%= render "users/answers", answers: @user.answers %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,10 +3,10 @@ table.table.table-striped
     tr
       th Вопрос
       th Пользователь
-      th Дата
+      th Задан
   tbody
     - questions.each do |question|
       tr
         td = link_to question.description, question_path(question)
         td = question.user.username
-        td = formatted_date(question.created_at)
+        td = "#{time_ago_in_words(question.created_at)} назад"

@@ -9,6 +9,9 @@ class QuestionSearch
   def similar_answer
     return if (question = search_question).blank?
 
+    answer = question.answers.order("votes_count DESC").where(is_author: true).first
+    return answer if answer.present?
+
     question.answers.order("votes_count DESC").first
   end
 

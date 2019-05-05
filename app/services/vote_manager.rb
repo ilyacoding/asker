@@ -5,7 +5,9 @@ class VoteManager
     end
 
     def vote(user, answer)
-      Vote.create(user: user, answer: answer)
+      Vote.create(user: user, answer: answer).tap do
+        answer.update(is_author: true) if answer.question.user.id == user.id
+      end
     end
   end
 end

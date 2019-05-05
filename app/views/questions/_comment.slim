@@ -1,0 +1,22 @@
+.row
+  .col-sm-1
+    .thumbnail
+      img.img-responsive.user-photo src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+  .col-sm-8
+    .panel.panel-default
+      .panel-heading
+        strong = answer.user.username
+        span.text-muted.margin-left = "откомментировал #{time_ago_in_words(answer.created_at)} назад"
+        span
+          - if can?(:create, Vote) && !VoteManager.voted_for?(current_user, answer)
+            = link_to "+1", answer_vote_path(answer), method: :post, class: 'btn btn-xs btn-success margin-left'
+          - if can? :destroy, answer
+            = link_to "Удалить", answer_path(answer), method: :delete, class: 'btn btn-xs btn-danger margin-left'
+        - if VoteManager.voted_for?(answer.question.user, answer)
+          span.right-align
+            i.fa.fa-star = " Выбор автора"
+        span.right-align.margin-left
+      .panel-body
+        = answer.content
+        hr
+        = "Рейтинг: +#{answer.votes_count}"

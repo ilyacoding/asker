@@ -8,5 +8,5 @@ table.table.table-striped
     - questions.each do |question|
       tr
         td = link_to question.description, question_path(question)
-        td = question.user.email
-        td = l(question.created_at, format: "%H:%M, %-d %b")
+        td = question.user.username
+        td = formatted_date(question.created_at)

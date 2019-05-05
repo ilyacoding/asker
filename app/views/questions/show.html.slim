@@ -8,15 +8,16 @@
   .panel-body
     h4 Возможный ответ
     - if @similar_answer.present?
+      - similar_question = @similar_answer.question
       = @similar_answer.content
-      = link_to "(вопрос)", question_path(@similar_answer.question)
+      = link_to " (#{similar_question.description})", question_path(similar_question)
     - else
       | Похожих вопросов не найдено
 - if @question.answers.any?
   table.table.table-striped
     thead
       tr
-        th Ответы
+        th Ответы на данный вопрос
     tbody
       - @question.answers.order("votes_count DESC").each do |answer|
         tr

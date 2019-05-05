@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   def index
+    raise CanCan::AccessDenied if current_user.blank?
+
     @users = User.all
   end
 

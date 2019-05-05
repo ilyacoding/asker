@@ -9,4 +9,4 @@ table.table.table-striped
       tr
         td = link_to question.description, question_path(question)
         td = question.user.email
-        td = l question.created_at
+        td = l(question.created_at, format: "%H:%M, %-d %b")
